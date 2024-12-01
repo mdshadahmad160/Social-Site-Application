@@ -1,10 +1,12 @@
 package com.social.api.repository;
 
+import com.social.api.entity.Comment;
+import com.social.api.entity.Post;
 import com.social.api.entity.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +17,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUsersByFollowerUsers(User user, Pageable pageable);
     List<User> findUsersByFollowingUsers(User user, Pageable pageable);
 
-    /*List<User> findUsersByLikedPosts(Post post, Pageable pageable);
+    List<User> findUsersByLikedPosts(Post post, Pageable pageable);
     List<User> findUsersByLikedComments(Comment comment, Pageable pageable);
-*/
+
     @Query(value = "select * from users u " +
             "where concat(u.first_name, ' ', u.last_name) like %:name% " +
             "order by u.first_name asc, u.last_name asc",
