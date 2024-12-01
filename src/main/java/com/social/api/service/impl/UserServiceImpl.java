@@ -12,12 +12,12 @@ import com.social.api.repository.UserRepository;
 import com.social.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> getFollowerUsersPaginate(Long userId, Integer page, Integer size) {
         User targetUser=getUserById(userId);
         return userRepository.findUsersByFollowingUsers(targetUser,
-                        (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "firstName", "lastName")))
+                         PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "firstName", "lastName")))
                 .stream().map(this::userToUserResponse).collect(Collectors.toList());    }
 
     @Override

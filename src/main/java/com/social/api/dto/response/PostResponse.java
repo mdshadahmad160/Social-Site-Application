@@ -1,5 +1,6 @@
 package com.social.api.dto.response;
 
+import com.social.api.entity.Post;
 import lombok.*;
 
 @Getter
